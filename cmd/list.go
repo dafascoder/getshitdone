@@ -68,3 +68,7 @@ func setupTable(tasks []db.Task) *table.Table {
 		})
 	return t
 }
+
+func init() {
+	rootCmd.AddCommand(listCmd)
+}
