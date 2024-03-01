@@ -118,7 +118,6 @@ func (t *TaskDB) UpdateTask(task Task) error {
 		task.ID)
 	return err
 }
-
 func (t *TaskDB) DeleteTask(id int) error {
 	log.Println("Deleting task from the database")
 	_, err := t.database.Exec("DELETE FROM tasks WHERE id=?", id)

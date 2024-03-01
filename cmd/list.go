@@ -5,9 +5,11 @@ package cmd
 
 import (
 	"fmt"
+	"getshitdone/components"
 	"getshitdone/db"
 	"log"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
 	"github.com/spf13/cobra"
@@ -18,16 +20,11 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "list all tasks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		t, err := db.OpenDB()
-		if err != nil {
-			return err
-		}
-		defer t.Close()
-		tasks, err := t.GetTasks()
-		if err != nil {
+		m := components.TableModel{Table: components.TableColumnSturcture()}
+		p := tea.NewProgram(m)
+		if _, err := p.Run(); err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(setupTable(tasks))
 		return nil
 	},
 }

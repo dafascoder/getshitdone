@@ -175,7 +175,6 @@ func (m Model) View() string {
 		// Status (right side)
 		var status string
 		{
-		
 
 			const statusWidth = 28
 			statusMarginLeft := m.width - statusWidth - lipgloss.Width(form) - s.Status.GetMarginRight()
@@ -229,7 +228,7 @@ func (m Model) appBoundaryView(text string) string {
 	return lipgloss.PlaceHorizontal(
 		m.width,
 		lipgloss.Left,
-    m.styles.HeaderText.Render(text),
+		m.styles.HeaderText.Render(text),
 		lipgloss.WithWhitespaceChars("/"),
 		lipgloss.WithWhitespaceForeground(indigo),
 	)

@@ -16,8 +16,10 @@ var createCmd = &cobra.Command{
 	Short: "Add a new task to the list of tasks.",
 	RunE: func(cmd *cobra.Command, args []string) error {
 
+		if cmd.Flags().Changed("project") == false {
+			log.Fatal("Project is required")
+		}
 		createTask()
-
 		return nil
 	},
 }
@@ -32,5 +34,7 @@ func createTask() {
 func init() {
 	createCmd.Flags().StringP("project", "p", "", "Project the task belongs to")
 	createCmd.Flags().StringP("description", "d", "", "Description of the task")
+	createCmd.Flags().StringP("name", "n", "", "Name of the task")
+	createCmd.Flags().StringP("options", "o", "", "Options for the task")
 	rootCmd.AddCommand(createCmd)
 }
