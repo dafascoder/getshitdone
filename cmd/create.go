@@ -4,31 +4,29 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"getshitdone/db"
+	"getshitdone/components"
+	"log"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
 )
 
 var createCmd = &cobra.Command{
-	Use:   "create NAME",
+	Use:   "create",
 	Short: "Add a new task to the list of tasks.",
-	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		t, err := db.OpenDB()
-		if err != nil {
-			return err
-		}
-		defer t.Close()
-		project, err := cmd.Flags().GetString("project")
-		if err != nil {
-			return err
-		}
-		description, err := cmd.Flags().GetString("description")
-		if err != nil {
-			return err
-		}
-		return t.AddTask(args[0], description, project)
+
+		createTask()
+
+		return nil
 	},
+}
+
+func createTask() {
+	p := tea.NewProgram(components.NewModel())
+	if _, err := p.Run(); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func init() {
