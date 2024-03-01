@@ -175,9 +175,7 @@ func (m Model) View() string {
 		// Status (right side)
 		var status string
 		{
-			var (
-				buildInfo = "(None)"
-			)
+		
 
 			const statusWidth = 28
 			statusMarginLeft := m.width - statusWidth - lipgloss.Width(form) - s.Status.GetMarginRight()
@@ -186,7 +184,6 @@ func (m Model) View() string {
 				Width(statusWidth).
 				MarginLeft(statusMarginLeft).
 				Render(s.StatusHeader.Render("Current Task") + "\n" +
-					buildInfo +
 					name + "\n" +
 					project + "\n" +
 					description + "\n",
@@ -232,7 +229,7 @@ func (m Model) appBoundaryView(text string) string {
 	return lipgloss.PlaceHorizontal(
 		m.width,
 		lipgloss.Left,
-		m.styles.HeaderText.Render(text),
+    m.styles.HeaderText.Render(text),
 		lipgloss.WithWhitespaceChars("/"),
 		lipgloss.WithWhitespaceForeground(indigo),
 	)
